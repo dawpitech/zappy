@@ -1,0 +1,9 @@
+[submodule "zappyGUI"]
+	path = zappyGUI
+	url = git@github.com:dawpitech/zappyGUI.git
+[submodule "zappyAI"]
+	path = zappyAI
+	url = git@github.com:dawpitech/zappyAI.git
+[submodule "zappySERVER"]
+	path = zappySERVER
+	url = git@github.com:dawpitech/zappySERVER.git
