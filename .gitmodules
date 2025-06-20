@@ -7,3 +7,6 @@
 [submodule "zappySERVER"]
 	path = zappySERVER
 	url = git@github.com:dawpitech/zappySERVER.git
+[submodule "zappyDOC"]
+	path = zappyDOC
+	url = git@github.com:dawpitech/zappyDOC.git
