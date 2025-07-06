@@ -23,3 +23,26 @@ jobs:
           git add .
           git commit -m "update: submodules to latest version"
           git push
+
+  mirror:
+    if: github.event_name != 'pull_request' && github.repository_owner == 'dawpitech'
+    runs-on: ubuntu-latest
+    needs: update-submodules
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodule: 'recursive'
+          fetch-depth: '0'
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: $SSH_PUB_KEY
+
+      - name: Push to epitech
+        run: |
+          git remote add epitech "${{ secrets.MIRROR_REPO }}"
+          git push --force epitech
