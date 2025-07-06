@@ -44,7 +44,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodule: 'recursive'
+          submodules: 'recursive'
           fetch-depth: '0'
 
       - name: Install SSH key
@@ -52,6 +52,28 @@ jobs:
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: $SSH_PUB_KEY
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Remove submodules
+        run: |
+          rm .gitmodules
+          rm -rf zappySERVER/.git*
+          rm -rf zappyAI/.git*
+          rm -rf zappyGUI/.git*
+          rm -rf zappyDOC/.git*
+          git rm --cached zappySERVER
+          git add .
+          git rm --cached zappyAI
+          git add .
+          git rm --cached zappyGUI
+          git add .
+          git rm --cached zappyDOC
+          git add .
+          git commit -m "chore: Resolve submodules"
 
       - name: Push to epitech
         run: |
