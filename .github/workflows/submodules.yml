@@ -9,6 +9,8 @@ on:
 jobs:
   update-submodules:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Main Repository
         uses: actions/checkout@v3
