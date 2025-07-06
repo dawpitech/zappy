@@ -1,0 +1,25 @@
+name: Update Submodules
+
+on:
+  repository_dispatch:
+    types:
+      - update_submodule
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Main Repository
+        uses: actions/checkout@v3
+
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update Submodules
+        run: |
+          git submodule update --remote
+          git add .
+          git commit -m "update: submodules to latest version"
+          git push
